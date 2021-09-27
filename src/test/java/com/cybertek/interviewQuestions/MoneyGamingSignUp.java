@@ -20,11 +20,12 @@ public class MoneyGamingSignUp {
         WebElement surname = driver.findElement(By.cssSelector("input[name='map(lastName)']"));
         surname.sendKeys("Sahin");
 
-        WebElement termsConditions = driver.findElement(By.cssSelector("div#termsCheckbox"));
-
-
-        Assert.assertTrue(termsConditions.getText().equals("I accept the Terms and Conditions and certify that I am " +
-                "over the age of 18."),"Verify the text of Checkbox");
+        String expectedText = "I accept the Terms and Conditions and certify that I am over the age of 18.";
+    //  WebElement termsConditions = driver.findElement(By.cssSelector("div#termsCheckbox"));
+     // WebElement termsConditions = driver.findElement(By.xpath("//input[@name='map(terms)']/following-sibling::*"));
+        WebElement termsConditions = driver.findElement(By.cssSelector("input[name='map(terms)']~div"));
+        String actualText = termsConditions.getText();
+        Assert.assertEquals(actualText, expectedText);
 
         WebElement termsBox = driver.findElement(By.cssSelector("input[name='map(terms)']"));
         termsBox.click();
@@ -34,7 +35,9 @@ public class MoneyGamingSignUp {
 
         WebElement validationMessage = driver.findElement(By.cssSelector("label[for='map(email)']"));
         System.out.println(validationMessage.getText());
-        Assert.assertTrue(validationMessage.getText().equals("This field is required"),"verify that message appears under the date of" +
+        Assert.assertEquals(validationMessage.getText(), ("This field is required"),"verify that message appears " +
+                "under " +
+                "the date of" +
                 "        birth box");
 
         Thread.sleep(2000);

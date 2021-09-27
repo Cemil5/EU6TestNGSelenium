@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class SeleniumEasyCheckBox {
     @Test
     public void Section1() throws InterruptedException {
@@ -30,10 +32,10 @@ public class SeleniumEasyCheckBox {
         driver.get("http://www.seleniumeasy.com/test/basic-checkbox-demo.html");
 
         WebElement checkAllButton = driver.findElement(By.cssSelector("#check1"));
-        Assert.assertTrue(checkAllButton.getAttribute("value").equals("Check All"),"Verify “Check All” button text is “Check All”");
+        Assert.assertEquals(checkAllButton.getAttribute("value"), "Check All");
         checkAllButton.click();
 
-        WebElement option1 = driver.findElement(By.xpath("(//input[@class='cb1-element'])[1]"));
+      /*  WebElement option1 = driver.findElement(By.xpath("(//input[@class='cb1-element'])[1]"));
         Assert.assertTrue(option1.isSelected());
         WebElement option2 = driver.findElement(By.xpath("(//input[@class='cb1-element'])[2]"));
         Assert.assertTrue(option2.isSelected());
@@ -41,12 +43,25 @@ public class SeleniumEasyCheckBox {
         Assert.assertTrue(option3.isSelected());
         WebElement option4 = driver.findElement(By.xpath("(//input[@class='cb1-element'])[4]"));
         Assert.assertTrue(option4.isSelected());
+        */
 
-        Assert.assertTrue(checkAllButton.getAttribute("value").equals("Uncheck All"),"Verify button text changed to “Uncheck All”");
+        for (int i=1; i<=4;i++){
+            String element = "(//input[@class='cb1-element'])[" + i + "]";
+            WebElement optionCheck = driver.findElement(By.xpath(element));
+            Assert.assertTrue(optionCheck.isSelected());
+        }
+
+      /*  List<WebElement> MultChkBox = driver.findElements(By.xpath("//input[@class='cb1-element']"));
+        for (WebElement multChkBox : MultChkBox) {
+            Assert.assertTrue(multChkBox.isSelected());
+
+        Assert.assertEquals(checkAllButton.getAttribute("value"), "Uncheck All");
+       */
 
         Thread.sleep(2000);
         driver.close();
     }
+
 }
 /*
 
