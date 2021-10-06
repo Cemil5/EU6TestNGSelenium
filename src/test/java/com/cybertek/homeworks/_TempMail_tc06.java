@@ -21,11 +21,9 @@ public class _TempMail_tc06 {
     @Test
     public void testCase06() throws InterruptedException {
 
-        driver = WebDriverFactory.getDriver("chrome");
-        driver.manage().window().maximize();
-
         driver.get("https://www.tempmailaddress.com/");
         String email = driver.findElement(By.cssSelector("div>#email")).getText();
+        System.out.println("email = " + email);
 
         driver.get("https://practice-cybertekschool.herokuapp.com");
         driver.findElement(By.partialLinkText("Sign Up")).click();
@@ -45,7 +43,7 @@ public class _TempMail_tc06 {
         Assert.assertEquals(actualMessage, expectedMessage);
 
         driver.get("https://www.tempmailaddress.com/");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         String actualIncomingEmail = driver.findElement(By.xpath("(//span[@class='odMobil'])[1]")).getAttribute("innerHTML");
         String expectedIncomingEmail = "do-not-reply@practice.cybertekschool.com";
 
@@ -65,7 +63,7 @@ public class _TempMail_tc06 {
     }
 
     @Test
-    public void test6(){
+    public void test6() {
 
         driver.get("https://www.tempmailaddress.com/");
         String email = driver.findElement(By.cssSelector("span#email")).getText();
@@ -83,6 +81,24 @@ public class _TempMail_tc06 {
         Assert.assertEquals(actualText,expectedText,"sign up verification failed");
 
         driver.findElement(By.cssSelector("#wooden_spoon")).click();
+
+        driver.get("https://www.tempmailaddress.com/");
+
+        String expectedMaildAddress = "do-not-reply@practice.cybertekschool.com";
+        String odMobil = driver.findElement(By.className("odMobil")).getAttribute("innerHTML");
+        Assert.assertEquals(odMobil,expectedMaildAddress);
+
+
+        driver.findElement(By.xpath("//table//td[2]")).click();
+
+        expectedMaildAddress = "do-not-reply@practice.cybertekschool.com";
+        String actualMailAddress = driver.findElement(By.id("odesilatel")).getText();
+
+        Assert.assertEquals(actualMailAddress,expectedMaildAddress);
+
+        String expectedSubject = "Thanks for subscribing to practice.cybertekschool.com!";
+        String actualSubject = driver.findElement(By.id("predmet")).getText();
+        Assert.assertEquals(actualSubject,expectedSubject);
 
     }
     /*
@@ -127,7 +143,23 @@ Step 4. Verify that following message is displayed:
         Assert.assertEquals(actualText,expectedText,"country text verify failed");
 
     }
+    @Test
+    public void test_7(){
+        driver.get("https://practice-cybertekschool.herokuapp.com/");
+        driver.findElement(By.linkText("File Upload")).click();
 
+        String projectPath = System.getProperty("user.dir");
+        String filePath = "src/test/resources/file.txt";
+        String fullPath = projectPath + "/" + filePath;
+
+        driver.findElement(By.id("file-upload")).sendKeys(fullPath);
+
+        driver.findElement(By.id("file-submit")).click();
+
+        String actualFilename = driver.findElement(By.id("uploaded-files")).getText();
+
+        Assert.assertEquals(actualFilename,"file.txt");
+    }
 }
 
 /*

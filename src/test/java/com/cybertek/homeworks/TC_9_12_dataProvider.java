@@ -5,12 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TC_9_12 {
+public class TC_9_12_dataProvider {
     WebDriver driver;
 
     @BeforeClass
@@ -66,7 +69,69 @@ Step 4. Then click on “500”.
 Step 5. Verify that following message is displayed:
 “This page returned a 500 status code”
  */
-@Test
+
+    //This method will provide data to any test method that declares that its Data Provider
+//is named "statusCodes"
+    @DataProvider(name = "statusCodes")
+    public Object[][] createData1() {
+        return new Object[][] {
+                { "200" }, { "301"}, {"404"}, {"500"}
+        };
+    }
+    //This test method declares that its data should be supplied by the Data Provider
+//named "statusCodes"
+    @Test(dataProvider = "statusCodes")
+    public void test9_12 (String code) {
+
+        driver.get("https://practice-cybertekschool.herokuapp.com");
+        driver.findElement(By.linkText("Status Codes")).click();
+
+        driver.findElement(By.linkText(code)).click();
+
+        String actualText = driver.findElement(By.cssSelector(".example>p")).getText();
+        actualText = actualText.split("\\.")[0];
+
+        String expectedText = "This page returned a " + code + " status code";
+        Assert.assertEquals(actualText,expectedText,"text of " + code +" not as expected");
+    }
+
+    @DataProvider (name="testdatas")
+    public Object[][] getData(){
+
+        Object[][] datas = {
+                {"https://practice-cybertekschool.herokuapp.com/","Status Codes","200", "//p[contains(., '200 status')]" },
+                {"https://practice-cybertekschool.herokuapp.com/","Status Codes","301", "//p[contains(., '301 status')]" },
+                {"https://practice-cybertekschool.herokuapp.com/","Status Codes","404", "//p[contains(., '404 status')]" },
+                {"https://practice-cybertekschool.herokuapp.com/","Status Codes","500", "//p[contains(., '500 status')]" },
+        };
+
+        return datas;
+    }
+
+    @Test (dataProvider = "testdatas")
+    public void test9_12(String par1, String par2, String par3, String par4){
+
+        driver.get(par1);
+
+        driver.findElement(By.linkText(par2)).click();
+
+        driver.findElement(By.linkText(par3)).click();
+
+        String expectedResult = "This page returned a "+ par3 + " status code.";
+
+        String actualResult = driver.findElement(By.xpath(par4)).getText();
+
+        Assert.assertTrue(actualResult.contains(expectedResult), "Verify that "+ par3 +" status message is displayed");
+    }
+
+
+
+
+
+
+
+
+    @Test
 public void test9_12() {
 
     driver.get("https://practice-cybertekschool.herokuapp.com");
@@ -91,30 +156,5 @@ public void test9_12() {
         driver.navigate().back();
     }
 }
-    //This method will provide data to any test method that declares that its Data Provider
-//is named "statusCodes"
-    @DataProvider(name = "statusCodes")
-    public Object[][] createData1() {
-        return new Object[][] {
-                { "200" }, { "301"}, {"404"}, {"500"}
-        };
-    }
-
-    //This test method declares that its data should be supplied by the Data Provider
-//named "statusCodes"
-    @Test(dataProvider = "statusCodes")
-    public void test9_12_dataProvider(String code) {
-
-        driver.get("https://practice-cybertekschool.herokuapp.com");
-        driver.findElement(By.linkText("Status Codes")).click();
-
-        driver.findElement(By.linkText(code)).click();
-
-        String actualText = driver.findElement(By.cssSelector(".example>p")).getText();
-        actualText = actualText.split("\\.")[0];
-
-        String expectedText = "This page returned a " + code + " status code";
-        Assert.assertEquals(actualText,expectedText,"text of " + code +" not as expected");
-    }
 
 }

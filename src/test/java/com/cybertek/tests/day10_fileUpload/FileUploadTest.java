@@ -37,8 +37,7 @@ public class FileUploadTest {
         String filePath = "src/test/resources/file.txt";
         String fullPath = projectPath + "/" + filePath;
 
-        chooseFile.sendKeys(fullPath);
-
+        driver.findElement(By.id("file-upload")).sendKeys(fullPath);
 
         driver.findElement(By.id("file-submit")).click();
 

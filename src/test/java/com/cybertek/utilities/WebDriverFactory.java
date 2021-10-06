@@ -9,8 +9,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.Locale;
 
 public class WebDriverFactory {
-    public WebDriverFactory(String chrome) {
-    }
    /* parametername: browserType
     return FirefoxDriver or firefoxdriver
     method name getDriver */
