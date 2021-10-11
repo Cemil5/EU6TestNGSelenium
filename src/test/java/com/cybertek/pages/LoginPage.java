@@ -3,6 +3,7 @@ package com.cybertek.pages;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -12,16 +13,22 @@ import java.util.List;
 public class LoginPage {
 
     public LoginPage(){
+        // This page doesn't have common features with BasePage, and we didn't extend to BasePage. Other pages has
+        // common features and we extend them.
+
         PageFactory.initElements(Driver.get(),this);    //we can use the annotation in this class
         // for locators by this keyword
     }
 
 
     // driver.findElement(By.id("prependedInput"));
-    @FindBys({
+  /*  @FindAll({
             @FindBy(id = "prependedInput"),
             @FindBy(name = "_username")
-    })// we can use 8 different locators we learned
+    })
+    // we can use 8 different locators we learned
+   */
+    @FindBy(id = "prependedInput")
     public WebElement usernameInput;
 
     @FindBy(id = "prependedInput2")
@@ -41,11 +48,17 @@ public class LoginPage {
 
     public void loginAsStoremanager() {
 
-        LoginPage loginPage = new LoginPage();
-
         String username = ConfigurationReader.get("storemanager_username");
         String password = ConfigurationReader.get("storemanager_password");
 
-        loginPage.login(username, password);
+        login(username, password);
+    }
+
+    public void loginAsDriver() {
+
+        String username = ConfigurationReader.get("driver_username");
+        String password = ConfigurationReader.get("driver_password");
+
+        login(username, password);
     }
 }

@@ -8,21 +8,20 @@ import java.util.Properties;
  */
 public class ConfigurationReader {
 
-    private static Properties properties;
+    // properties --> class that store properties in key / value format
+    private static Properties properties = new Properties();
 
     // static block: runs first before our codes
     static {
 
         try {
-            // what file to read
+            // which file to read
             String path = "configuration.properties";
-            // it reads the file into java, finds the file using the string path
+            // FileInputStream object finds the file using the string path, reads the file into java.
             FileInputStream input = new FileInputStream(path);
-            // properties --> class that store properties in key / value format
-            properties = new Properties();
+
             // the values from the file input is loaded / fed in to the properties object
             properties.load(input);
-
             input.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,9 +32,4 @@ public class ConfigurationReader {
 
         return properties.getProperty(keyName);
     }
-
-
-
-
-
 }
