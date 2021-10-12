@@ -19,6 +19,7 @@ public class TestBase {
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;
+
     protected static ExtentReports report;
     //this class is used to create HTML report file
     protected static ExtentHtmlReporter htmlReporter;
@@ -57,7 +58,7 @@ public class TestBase {
     @Parameters("env")
     public void setUp(@Optional String env){
 
-        System.out.println("env== " + env);
+      //  System.out.println("env== " + env);
         if (env==null){
             url =ConfigurationReader.get("url");
         }else{

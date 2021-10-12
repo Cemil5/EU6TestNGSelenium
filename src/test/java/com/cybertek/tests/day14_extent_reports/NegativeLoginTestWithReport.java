@@ -1,6 +1,6 @@
 package com.cybertek.tests.day14_extent_reports;
 
-import com.cybertek.pages.Contacts;
+import com.cybertek.pages.ContactsPage;
 import com.cybertek.pages.DashboardPage;
 import com.cybertek.pages.LoginPage;
 import com.cybertek.tests.TestBase;
@@ -78,7 +78,7 @@ public class NegativeLoginTestWithReport extends TestBase {
     dashboardPage.navigateToModule("Customers", "Contacts");
 
     extentLogger.info("click on email mbrackstone9@example.com");
-    Contacts contacts = new Contacts();
+    ContactsPage contacts = new ContactsPage();
     String email = "mbrackstone9@example.com";
     contacts.clickEmailBox(email);
 

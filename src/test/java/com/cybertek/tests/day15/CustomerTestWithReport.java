@@ -1,6 +1,7 @@
 package com.cybertek.tests.day15;
 
-import com.cybertek.pages.Contacts;
+import com.cybertek.pages.ContactViewPage;
+import com.cybertek.pages.ContactsPage;
 import com.cybertek.pages.DashboardPage;
 import com.cybertek.pages.LoginPage;
 import com.cybertek.tests.TestBase;
@@ -20,8 +21,12 @@ public class CustomerTestWithReport extends TestBase {
      * verify that phone number is +18982323434
      */
 
-@Test
+    @Test
     public void CustomerValidation(){
+
+    String email = "mbrackstone9@example.com";
+    String fullName = "Mariam Brackstone";
+    String phone = "+18982323434";
 
     extentLogger = report.createTest("Customer Validation test");
 
@@ -34,16 +39,21 @@ public class CustomerTestWithReport extends TestBase {
     dashboardPage.navigateToModule("Customers", "Contacts");
 
     extentLogger.info("click on email mbrackstone9@example.com");
-    Contacts contacts = new Contacts();
-    String email = "mbrackstone9@example.com";
-    contacts.clickEmailBox(email);
+    ContactsPage contactsPage = new ContactsPage();
+    contactsPage.clickEmailBox(email);
 
     extentLogger.info("verify that full name is Mariam Brackstone");
+    ContactViewPage contactViewPage = new ContactViewPage();
+    Assert.assertEquals(contactViewPage.fullName.getText(), fullName, "verify full name");
+
     extentLogger.info("verify that email is mbrackstone9@example.com");
+    Assert.assertEquals(contactViewPage.email.getText(), email, "verify email");
+
     extentLogger.info("verify that phone number is +18982323434");
+    Assert.assertEquals(contactViewPage.phone.getText(),phone, "verify phone number");
 
     extentLogger.pass("Customer Validation test is passed");
 
-}
+    }
 
 }
