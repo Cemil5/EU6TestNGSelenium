@@ -61,4 +61,11 @@ public class LoginPage {
 
         login(username, password);
     }
+    public void loginAsSalesManager () {
+
+        String username = ConfigurationReader.get("salesmanager_username");
+        String password = ConfigurationReader.get("salesmanager_password");
+
+        login(username, password);
+    }
 }

@@ -1,9 +1,12 @@
 package com.cybertek.tests.day11_webTables;
 
+import com.cybertek.pages.LoginPage;
 import com.cybertek.utilities.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -117,4 +120,27 @@ public class WebTablesExample {
         List<WebElement> rows = driver.findElements(By.xpath("//table[1]//tbody/tr"));
         return rows.size();
     }
+
+
+    @Test
+    public void testVyTrack(){
+        driver.get("https://qa1.vytrack.com");
+
+        driver.findElement(By.id("prependedInput")).sendKeys("salesmanager120");
+        driver.findElement(By.id("prependedInput2")).sendKeys("UserUser123");
+        driver.findElement(By.cssSelector(".btn.btn-primary")).click();
+
+        driver.navigate().to("https://qa1.vytrack.com/contact");
+
+
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.tagName("table"))));
+
+        WebElement element = driver.findElement(By.xpath("//td[text()='mbrackstone9@example.com']"));
+        System.out.println("element.getText() = " + element.getText());
+        element.click();
+
+    }
+
+
 }

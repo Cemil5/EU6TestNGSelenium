@@ -27,7 +27,8 @@ public class BrowserUtils {
         // name the screenshot with the current date time to avoid duplicate name
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         // TakesScreenshot ---> interface from selenium which takes screenshots
-        TakesScreenshot ts = (TakesScreenshot) Driver.get();
+        TakesScreenshot ts = (TakesScreenshot) Driver.get();  // We use TakesScreenshot interface from selenium
+        // library and its getScreenshotAs method to take screenshot
         File source = ts.getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
         String target = System.getProperty("user.dir") + "/test-output/Screenshots/" + name + date + ".png";
