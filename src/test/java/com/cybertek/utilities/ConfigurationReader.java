@@ -18,11 +18,11 @@ public class ConfigurationReader {
             // which file to read
             String path = "configuration.properties";
             // FileInputStream object finds the file using the string path, reads the file into java.
-            FileInputStream input = new FileInputStream(path);
+            FileInputStream file = new FileInputStream(path);
 
-            // the values from the file input is loaded / fed in to the properties object
-            properties.load(input);
-            input.close();
+            // the values from the "configuration.properties" are loaded to file object
+            properties.load(file);
+            file.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

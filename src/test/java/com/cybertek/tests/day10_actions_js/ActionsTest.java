@@ -84,8 +84,9 @@ public class ActionsTest {
 
         WebElement inputBox = driver.findElement(By.cssSelector("#input-example>input"));
 
-        String text = "hello I came";
+
         JavascriptExecutor jse = (JavascriptExecutor)driver;
+        String text = "hello I came";
         jse.executeScript("arguments[0].setAttribute('value', '" + text +"')", inputBox);
 
     }

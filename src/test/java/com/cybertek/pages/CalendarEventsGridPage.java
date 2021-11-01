@@ -8,11 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CalendarEventsPage extends BasePage {
-
-    public CalendarEventsPage() {
-        PageFactory.initElements(Driver.get(), this);
-    }
+public class CalendarEventsGridPage {
 
     @FindBy(css = "[title='Create Calendar event']")
     public WebElement createCalendarEvent;
@@ -60,5 +56,12 @@ public class CalendarEventsPage extends BasePage {
     public Integer getTableRowNumber(){
         return Driver.get().findElements(By.xpath("//tbody//tr")).size();
     }
+
+
+
+
+
+
+
 
 }

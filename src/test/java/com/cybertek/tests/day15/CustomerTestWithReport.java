@@ -1,6 +1,6 @@
 package com.cybertek.tests.day15;
 
-import com.cybertek.pages.ContactViewPage;
+import com.cybertek.pages.ContactInfoPage;
 import com.cybertek.pages.ContactsPage;
 import com.cybertek.pages.DashboardPage;
 import com.cybertek.pages.LoginPage;
@@ -38,21 +38,21 @@ public class CustomerTestWithReport extends TestBase {
     DashboardPage dashboardPage = new DashboardPage();
     dashboardPage.navigateToModule("Customers", "Contacts");
 
-    extentLogger.info("click on email mbrackstone9@example.com");
+    extentLogger.info("click on email " + email);
     ContactsPage contactsPage = new ContactsPage();
     contactsPage.clickEmailBox(email);
 
-    extentLogger.info("verify that full name is Mariam Brackstone");
-    ContactViewPage contactViewPage = new ContactViewPage();
-    Assert.assertEquals(contactViewPage.fullName.getText(), fullName, "verify full name");
+    extentLogger.info("verify that full name is " + fullName);
+    ContactInfoPage contactInfoPage = new ContactInfoPage();
+    Assert.assertEquals(contactInfoPage.fullName.getText(), fullName, "verify full name");
 
-    extentLogger.info("verify that email is mbrackstone9@example.com");
-    Assert.assertEquals(contactViewPage.email.getText(), email, "verify email");
+    extentLogger.info("verify that email is "+ email);
+    Assert.assertEquals(contactInfoPage.email.getText(), email, "verify email");
 
-    extentLogger.info("verify that phone number is +18982323434");
-    Assert.assertEquals(contactViewPage.phone.getText(),phone, "verify phone number");
+    extentLogger.info("verify that phone number is " + phone);
+    Assert.assertEquals(contactInfoPage.phone.getText(),phone, "verify phone number");
 
-    extentLogger.pass("Customer Validation test is passed");
+    extentLogger.pass("passed");
 
     }
 

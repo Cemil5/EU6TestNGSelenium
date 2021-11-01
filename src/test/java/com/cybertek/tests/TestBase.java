@@ -15,7 +15,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public abstract class TestBase {
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;

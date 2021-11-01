@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class BasePage {
+public class BasePage {
 
     @FindBy(css = "div[class='loader-mask shown']")
     @CacheLookup
@@ -85,8 +85,8 @@ public abstract class BasePage {
      * For example: if tab is equals to Activities, and module equals to Calls,
      * Then method will navigate user to this page: http://qa2.vytrack.com/call/
      *
-     * @param tab
-     * @param module
+     * param tab
+     * param module
      */
     public void navigateToModule(String tab, String module) {
         String tabLocator = "//span[normalize-space()='" + tab + "' and contains(@class, 'title title-level-1')]";
