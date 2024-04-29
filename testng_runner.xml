@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Vytrack Automation" verbose="1">
+    <test name="Vytrack Smoke Test">
+        <classes>
+            <class name="com.cydeo.tests.day14_extent_reports.NegativeLoginTestWithReport">
+                <methods>
+                    <exclude name="wrongPasswordTest"></exclude>
+                    <exclude name="wrongUsernameTest"></exclude>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

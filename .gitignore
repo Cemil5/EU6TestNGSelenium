@@ -1,2 +1,7 @@
 /target/
 /.idea/
+/test-output/
+*.iml
+/src/test/java/com/cybertek/JavaProgram/.metadata/
+/src/test/java/com/cybertek/JavaProgram/JavaLesson/.settings/
+/src/test/java/com/cybertek/JavaProgram/JavaLesson/bin/
